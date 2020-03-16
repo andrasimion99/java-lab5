@@ -2,13 +2,26 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class Main {
+    /**
+     *
+     * @param args
+     * aruncam mai departe exceptiile primite
+     * @throws IOException
+     * @throws URISyntaxException
+     * @throws InvalidCatalogException
+     */
     public static void main(String args[]) throws IOException, URISyntaxException, InvalidCatalogException {
         Main app = new Main();
         app.testCreateSave();
         app.testLoadView();
     }
 
-    private void testCreateSave() throws IOException, URISyntaxException {
+    /**
+     * creeam cate un obiect de tip Catalog si doua obiecte de tip Document pe care le introducem in catalog
+     * testam functia save pentru catalog
+     * @throws IOException aruncam mai departe exceptiile primite
+     */
+    private void testCreateSave() throws IOException {
         Catalog catalog =
                 new Catalog("Java Resources", "d:/java/catalog.ser");
         Document doc1 = new Document("java1", "Java Course 1",
@@ -21,6 +34,14 @@ public class Main {
         CatalogUtil.save(catalog);
     }
 
+    /**
+     * testam functia load, care ne va incarca catalogul de la un anumit path intr-un obiect local
+     * testam functia view care ne va deschide documentul chiar daca are un path local sua un url extern
+     * atuncam mai departe exceptiile primite
+     * @throws IOException
+     * @throws URISyntaxException
+     * @throws InvalidCatalogException
+     */
     private void testLoadView() throws IOException, URISyntaxException, InvalidCatalogException {
         Catalog catalog = CatalogUtil.load("d:/java/catalog.ser");
         Document doc1 = catalog.findById("java1");
