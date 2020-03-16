@@ -38,6 +38,11 @@ public class Catalog implements Serializable {
         documents.add(doc);
     }
 
+    /**
+     *
+     * @param id, reprezinta id-ul documentului pe care il caut in catalog
+     * @return un obiect de tipul Document daca il gaseste, respectiv, null daca nu exista
+     */
     public Document findById(String id) {
         return documents.stream().filter(doc -> doc.getId().equals(id)).findFirst().orElse(null);
     }
