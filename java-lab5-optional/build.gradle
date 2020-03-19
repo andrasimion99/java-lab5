@@ -2,6 +2,12 @@ plugins {
     id 'java'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
+
 group 'org.example'
 version '1.0-SNAPSHOT'
 
@@ -13,4 +19,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.json', name: 'json', version: '20180813'
+    runtime 'com.github.cliftonlabs:json-simple:3.1.1'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
 }

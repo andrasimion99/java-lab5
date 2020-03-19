@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+optional.Main-Class: optional.Main
+Class-Path: E:\facultate\Anul II\Anul II\Semestrul II\java\java-lab5\jav
+ a-lab5-optional\out\artifacts\java_lab5_jar\java-lab5.jar
+

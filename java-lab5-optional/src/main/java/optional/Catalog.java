@@ -1,4 +1,5 @@
-import javax.print.Doc;
+package optional;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,20 @@ public class Catalog implements Serializable {
         this.path = path;
     }
 
-    public void add(Document doc) {
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
+
+    public void add(Document doc) throws DuplicateIdException {
+        for(Document document: documents){
+            if(document.getId().equals(doc.getId())){
+                throw new DuplicateIdException(document.getId());
+            }
+        }
         documents.add(doc);
     }
 
@@ -44,7 +58,7 @@ public class Catalog implements Serializable {
 
     @Override
     public String toString() {
-        return "Catalog{" +
+        return "optional.Catalog{" +
                 "name='" + name + '\'' +
                 ", path='" + path + '\'' +
                 ", documents=" + documents +
