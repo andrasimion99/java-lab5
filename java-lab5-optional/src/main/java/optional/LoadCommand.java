@@ -20,6 +20,14 @@ public class LoadCommand implements Command {
         this.c = c;
     }
 
+    /**
+     * Am folosit FileReader pentru a citi date de la path-ul dat ca si parametru
+     * Am pus intr-un obiect de tip Object fisierul parsat cu ajutorul metodei parse() din clasa JSONParser pentru a lua continutul
+     * Am convertit obiectul meu cu informatii din fisier intr-un obiect de tip JSONObject pentru a putea accesa valorile campurilor create cand am dat save
+     * Clasa are un atribut, obiect de tip Catalog in care am sa-i setez toate atributele in functie de ce informatii extrag din fisier.
+     * Arunca exceptii daca path-ul nu este valid sau daca exista erori la parsare sau in fisiere.
+     * @param path reprezinta path-ul de la care vom extage informatiile si le vom pune in atributul clasei Catalog c
+     */
     @Override
     public void command(String path) {
         JSONParser parser = new JSONParser();

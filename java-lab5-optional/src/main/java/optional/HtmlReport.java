@@ -8,6 +8,10 @@ import java.io.IOException;
 public class HtmlReport implements Command {
     Catalog c;
 
+    /**
+     * constructorul seteaza inca de la inceput valaorea catalogului
+     * @param c catalogul pe care il vom seta inca de la inceput
+     */
     public HtmlReport(Catalog c) {
         this.c = c;
     }
@@ -21,6 +25,13 @@ public class HtmlReport implements Command {
         this.c = c;
     }
 
+    /**
+     * Metoda incearca sa contruiasca un html sub forma de String cu informatiile din Atributul catalog a clasei
+     * Folosim Clasa FileWriter pentru a crea fisierul la path-ul specificat si pentru scrie caratere in acesta
+     * Dupa ce am introdus toate infromatiile in fisier incercam sa in deschidem(randam) in browser cu metoda open() din clasa Desktop
+     * Metoda arunca exceptii in cazul in care apar erori la nivel de fisier
+     * @param path reprezinta path-ul in care vom salva html-ul construit
+     */
     @Override
     public void command(String path) {
         StringBuilder html = new StringBuilder();

@@ -19,6 +19,17 @@ public class ViewCommand implements Command {
         this.c = c;
     }
 
+    /**
+     * Cu ajutorul comenzii load incarcam in atributul Catalog c un catalog de la path-ul dat ca si parametru
+     * Dupa parcurgem lista de documente a catalogului si incercam sa le deschidem pe toate in browser astfel:
+     * Folosindu-ne de clasa Desktop incercam sa facem un obiect nou de tip URL
+     * daca aceasta arunca exceptie inseamna ca nu este valid si incercam sa il deschidem prin metoda open care primeste ca paramteru
+     * un obiect de tip File la path-ul dat
+     * daca nu a aruncat exceptie inseamna ca este un URL valid si incercam sa il deschidem cu metoda browse care primeste ca parametru
+     * un obiect de tip URI a path-ul mentionat
+     * Metoda face verficari in caz ca url-ul sau path-ul dat sunt invalide si arunca exceptii
+     * @param path path in care ne vom uita pentru documente pentru a le deschide in browser
+     */
     @Override
     public void command(String path) {
         Command load = new LoadCommand();
@@ -32,7 +43,7 @@ public class ViewCommand implements Command {
                 new URL(doc.getLocation());
             } catch (MalformedURLException e) {
                 ok = false;
-                System.out.println(doc.getLocation() + " este un fisier local");
+                System.out.println(doc.getLocation() + " este un fisier cu path local");
                 try {
                     desktop.open(new File(doc.getLocation()));
                 } catch (IOException ex) {
@@ -40,7 +51,7 @@ public class ViewCommand implements Command {
                 }
             } finally {
                 if (ok) {
-                    System.out.println(doc.getLocation() + " este un fisier extern");
+                    System.out.println(doc.getLocation() + " este un fisier cu url extern");
                     try {
                         desktop.browse(new URI(doc.getLocation()));
                     } catch (IOException e) {

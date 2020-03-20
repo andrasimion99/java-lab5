@@ -21,8 +21,13 @@ public class Document implements Serializable {
         location = "";
     }
 
-    ;
-
+    /**
+     * Constructorul creeaza un obiect cu parametri respectivi iar pentru location va face mereu verificari daca este un url sau un path legit
+     * altfel va arunca o exceptie
+     * @param id, reprezinta id-ul documentului creat
+     * @param name, reprezinta numele documentului creat
+     * @param location, reprezinta locatia documentului creat
+     */
     public Document(String id, String name, String location) {
         this.id = id;
         this.name = name;

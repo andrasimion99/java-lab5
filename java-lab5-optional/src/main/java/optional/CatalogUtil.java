@@ -12,7 +12,43 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+/**
+ * clasa util ce va implementa functionalitati pentru programul principal
+ */
 public class CatalogUtil {
+    /**
+     * Folosim Clasa FileWriter pentru a crea fisierul la path-ul specificat si pentru scrie caratere in acesta
+     * Pentru a scrie fisierul in text plain am ales formatul JSON
+     * Pentru a stoca informatiile in format JSON am folosit clasa JSONObject
+     * De asemenea, pentru stocarea documentelor am folosit JSONArray in care am plasat mai mult obiecte de tipul JSONObject reprezentand un document cu informatiile aferente.
+     * Fiecare obiect poate avea si o list de taguri de tip "cheie": "valoare", asa ca pnetru acest camp am creat din nou un JSONObject in care am plasat informatiile despre taguri.
+     * La final obiectul meu ce va fi plasat sub forma: {
+     *     catalogName: value,
+     *     catalogPath: value,
+     *     catalogDocs: [
+     *     {
+     *         Id:value,
+     *         name:value,
+     *         location:value,
+     *         tags: {
+     *             tag1:value,
+     *             tag2:value
+     *         }
+     *     },
+     *     {
+     *         Id:value,
+     *         name:value,
+     *         location:value,
+     *         tags: {
+     *              tag1:value,
+     *              tag2:value
+     *          }
+     *     }
+     *     ]
+     * }
+     *
+     * @param catalog reprezinta catalogul pe care vrem sa il salvam in path-ul acestuia(catalog.getPath())
+     */
     public static void save(Catalog catalog) {
         try (FileWriter fout = new FileWriter(catalog.getPath())) {
             JSONObject obj = new JSONObject();
@@ -41,6 +77,15 @@ public class CatalogUtil {
         }
     }
 
+    /**
+     * Am folosit FileReader pentru a citi date de la path-ul dat ca si parametru
+     * Am pus intr-un obiect de tip Object fisierul parsat cu ajutorul metodei parse() din clasa JSONParser pentru a lua continutul
+     * Am convertit obiectul meu cu informatii din fisier intr-un obiect de tip JSONObject pentru a putea accesa valorile campurilor create cand am dat save
+     * Am creat un obiect local de tip Catalog in care am sa setez toate atributele in functie de ce informatii extrag din fisier.
+     * Arunca exceptii daca path-ul nu este valid sau daca exista erori la parsare sau in fisiere.
+     * @param path reprezinta path-ul de la care vom extage informatiile si le vom pune in obiectul nostru de tip Catalog
+     * @return un obiect de tip catalog pe care l-am construit cu informatiile extrase din path-ul fisierului dat ca si paramteru
+     */
     public static Catalog load(String path) {
         Catalog c = new Catalog();
         JSONParser parser = new JSONParser();
@@ -72,12 +117,25 @@ public class CatalogUtil {
         }
     }
 
+    /**
+     * Metoda list listeaza(afiseaza) toate informatiile dintr-un catalog incarcat de la path-ul fisierului dat ca si parametru
+     * @param path reprezinta path-ul fisierului din care vom lua informatii si le vom lista
+     */
     public static void list(String path) {
         Catalog c = new Catalog();
         c = load(path);
         System.out.println(c);
     }
 
+    /**
+     * Folosindu-ne de clasa Desktop incercam sa facem un obiect nou de tip URL
+     * daca aceasta arunca exceptie inseamna ca nu este valid si incercam sa il deschidem prin metoda open care primeste ca paramteru
+     * un obiect de tip File la path-ul dat
+     * daca nu a aruncat exceptie inseamna ca este un URL valid si incercam sa il deschidem cu metoda browse care primeste ca parametru
+     * un obiect de tip URI a path-ul mentionat
+     * Metoda face verficari in caz ca url-ul sau path-ul dat sunt invalide si arunca exceptii
+     * @param doc reprezinta documentul pe care vom vrea sa il deschide in browser
+     */
     public static void view(Document doc) {
         Desktop desktop = Desktop.getDesktop();
 
