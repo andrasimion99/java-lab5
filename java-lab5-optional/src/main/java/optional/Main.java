@@ -58,7 +58,7 @@ public class Main {
                 view.command(args[1]);
             }
             if (args[0].equals("html")) {
-                Catalog catalog = CatalogUtil.load("d:/java/catalog.json");
+                Catalog catalog = CatalogUtil.load("../java-lab5-optional/src/main/resources/catalog.json");
                 Command html = new HtmlReport(catalog);
                 html.command(args[1]);
             }
@@ -75,11 +75,11 @@ public class Main {
      */
     private void testCreateSave() {
         Catalog catalog =
-                new Catalog("Java Resources", "d:/java/catalog.json");
+                new Catalog("Java Resources", "../java-lab5-optional/src/main/resources/catalog.json");
         Document doc1 = new Document("java1", "Java Course 1",
                 "https://profs.info.uaic.ro/~acf/java/slides/en/intro_slide_en.pdf");
         Document doc2 = new Document("java2", "Java Course 2",
-                "E:\\facultate\\Anul II\\Anul II\\Semestrul II\\java\\intro_slide_en.pdf");
+                "../java-lab5-optional/src/main/resources/intro_slide_en.pdf");
         doc1.addTag("type", "Slides");
         try {
             catalog.add(doc1);
@@ -98,7 +98,7 @@ public class Main {
      * testam functia load care ne va incarca catalogul de la un anumit path intr-un obiect local, afisandu-l ulterior
      */
     private void testLoad() {
-        Catalog catalog1 = CatalogUtil.load("d:/java/catalog.json");
+        Catalog catalog1 = CatalogUtil.load("../java-lab5-optional/src/main/resources/catalog.json");
         System.out.println(catalog1);
     }
 
@@ -106,7 +106,7 @@ public class Main {
      * testam functia view care ne va deschide toate documentele dintr-un catalog pe care l-am incarcat dintr-un anumit path
      */
     private void testView() {
-        Catalog catalog = CatalogUtil.load("d:/java/catalog.json");
+        Catalog catalog = CatalogUtil.load("../java-lab5-optional/src/main/resources/catalog.json");
         for (Document doc : catalog.getDocuments()) {
             CatalogUtil.view(doc);
         }
